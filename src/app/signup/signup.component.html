@@ -1,0 +1,159 @@
+<header-app></header-app>
+<div class="holder">
+    <div class="container">
+        <div class="row">
+            <form (ngSubmit)="onSubmit()" #registerForm="ngForm" class="container padding-left-10" novalidate>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="form-group" [ngClass]="{'has-error':registerForm.submitted && !firstName.valid}">
+                            <label class="control-label">First Name<b class="text-danger">*</b></label>
+                            <div class="input-group">
+                                <input type="text" #firstName="ngModel" name="firstName" [(ngModel)]="user.firstName" class="form-control" required maxlength="29">
+                            </div>
+                            <div *ngIf="firstName.errors && firstName.touched">
+                                <span [hidden]="!firstName.errors.required" class="text-danger">First Name is required.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="form-group" [ngClass]="{'has-error':registerForm.submitted && !lastName.valid}">
+                            <label class="control-label">Last Name<b class="text-danger">*</b></label>
+                            <div class="input-group">
+                                <input type="text" #lastName="ngModel" name="lastName" [(ngModel)]="user.lastName" class="form-control" required maxlength="29">
+                            </div>
+                            <div *ngIf="lastName.errors && lastName.touched">
+                                <span [hidden]="!lastName.errors.required" class="text-danger">Last Name is required.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="form-group" [ngClass]="{'has-error':registerForm.submitted && !email.valid}">
+                            <label class="control-label">Email Address<b class="text-danger"><b class="text-danger">*</b></b></label>
+                            <div class="input-group">
+                                <input type="text" #email="ngModel" name="email" [(ngModel)]="user.emailAddress" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$"
+                                    class="form-control" required maxlength="200"/>
+                            </div>
+                            <div *ngIf="email.errors && email.touched">
+                                <span [hidden]="!email.errors.pattern" class="text-danger">Email Address format is invalid.</span>
+                                <span [hidden]="!email.errors.required" class="text-danger">Email Address is required.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="form-group" [ngClass]="{'has-error':registerForm.submitted && !phone.valid}">
+                            <label class="control-label">Phone No.<b class="text-danger">*</b></label>
+                            <div class="input-group">
+                                <input type="text" #phone="ngModel" name="phone" [(ngModel)]="user.contactPhone" class="form-control" pattern="^[0-9]{3}[ ]([0-9]{3})[-]([0-9]{4})$"
+                                    required placeholder="999 999-9999" minlength="10" maxlength="12"/>
+                            </div>
+                            <div *ngIf="phone.errors && phone.touched">
+                                <span [hidden]="!phone.errors.pattern" class="text-danger">Phone No. format is invalid.</span>
+                                <span [hidden]="!phone.errors.required" class="text-danger">Phone No. is required.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6" style="width:51.5%">
+                        <div class="form-group">
+                            <label class="control-label">Mailing Address<b class="text-danger">*</b></label>
+                            <input type="text" #address="ngModel" name="address" [(ngModel)]="user.mailingAddress" class="form-control" id="address"
+                                maxlength="300" required placeholder="Enter Mailing Address">
+                            <div *ngIf="address.errors && address.touched">
+                                <span [hidden]="!address.errors.required" class="text-danger">Mailing Address is required.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="form-group" [ngClass]="{'has-error': registerForm.submitted && !city.valid}">
+                            <label class="control-label" for="city">City*</label>
+                            <div class="input-group">
+                                <input type="text" #city="ngModel" [(ngModel)]="user.city" name="city" class="form-control" required/>
+                            </div>
+                            <div *ngIf="city.errors && city.touched">
+                                <span [hidden]="!city.errors.required" class="text-danger">City is required.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="form-group" [ngClass]="{'has-error': registerForm.submitted && !state.valid}">
+                            <label class="control-label" for="state">State*</label>
+                            <div class="input-group">
+                                <input type="text" #state="ngModel" [(ngModel)]="user.state" name="state" class="form-control" required/>
+                            </div>
+                            <div *ngIf="state.errors && state.touched">
+                                <span [hidden]="!state.errors.required" class="text-danger">State is required.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="form-group" [ngClass]="{'has-error': registerForm.submitted && !zip.valid}">
+                            <label class="control-label" for="zip">Zipcode*</label>
+                            <div class="input-group">
+                                <input type="text" #zip="ngModel" [(ngModel)]="user.zip" name="zip" class="form-control" pattern="^[0-9]{5}$" required/>
+                            </div>
+                            <div *ngIf="zip.errors && zip.touched">
+                                <span [hidden]="!zip.errors.pattern" class="text-danger">Zipcode must be 5 digits.</span>
+                                <span [hidden]="!zip.errors.required" class="text-danger">Zipcode No. is required.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="form-group" [ngClass]="{'has-error': registerForm.submitted && !username.valid}">
+                            <label class="control-label" for="username">Username*</label>
+                            <div class="input-group">
+                                <input type="text" #username="ngModel" [(ngModel)]="user.userName" name="username" class="form-control" required/>
+                            </div>
+                        </div>
+                        <div *ngIf="username.errors && username.touched">
+                            <span [hidden]="!username.errors.required" class="text-danger">UserName is required.</span>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="form-group" [ngClass]="{'has-error': registerForm.submitted && !password.valid}">
+                            <label class="control-label" for="password">Password*</label>
+                            <div class="input-group">
+                                <input type="text" #password="ngModel" [(ngModel)]="user.password" name="password" class="form-control" required/>
+                            </div>
+                            <div *ngIf="password.errors && password.touched">
+                                <span [hidden]="!password.errors.required" class="text-danger">Password is required.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="form-group" [ngClass]="{'has-error': registerForm.submitted && !cpassword.valid}">
+                            <label class="control-label" for="cpassword">Confirm Password*</label>
+                            <div class="input-group">
+                                <input type="text" #cpassword="ngModel" [(ngModel)]="user.cpassword" name="cpassword" class="form-control" required/>
+                            </div>
+                            <div *ngIf="cpassword.errors && cpassword.touched">
+                                <span [hidden]="!cpassword.errors.required" class="text-danger">Confirm Password is required.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div *ngIf="password.touched && cpassword.touched && password.valid && cpassword.valid" class="col-xs-12">
+                            <strong class="text-danger" [hidden]="user.password == user.cpassword">
+                                    Password and Confirm Password must be the same.
+                                </strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 col-sm-offset-3">
+                        <button type="submit" class="btn btn-primary btn-main" [disabled]="!registerForm.form.valid" [ngClass]="{disabled:!registerForm.form.valid}"
+                            (click)="onSignup(registerForm.form.valid)">
+                                 SIGN UP
+                            </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
